@@ -38,14 +38,13 @@ project-template/
 
 ### Prerequisites
 - **Backend:** Python 3.8 or higher
-- **Frontend:** Node.js, Angular JS (LTS version)
+- **Frontend:** Angular JS (LTS version)
 - **Docker:** Docker and Docker Compose installed on your system
 
 ### Setup
 1. **Clone the Repository:**
    ```bash
-   git clone [https://github.com/NeuGenAI-Solutions/project-template.git](https://github.com/NeuGenAI-Solutions/project-template.git)
-   cd project-template
+   git clone https://github.com/NeuGenAI-Solutions/project-kun-demo.git
    ```
 
 2. **Configure Environment Variables:**
