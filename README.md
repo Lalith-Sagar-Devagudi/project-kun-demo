@@ -52,22 +52,23 @@ project-template/
    - Copy `.env.example` to `.env` and update it with your environment-specific settings.
 
 3. **Install Dependencies:**
+     ```bash
+     poetry install
+     ```
+
+4. **Run Services:**
    - Backend:
      ```bash
-     cd backend
-     pip install -r requirements.txt
+     cd backend/app
+     poetry run uvicorn app:app --reload
      ```
    - Frontend:
      ```bash
      cd frontend
-     npm install
+     python -m http.server 8080
      ```
-
-4. **Run Services:**
-   - Using Docker Compose:
-     ```bash
-     docker-compose up
-     ```
+5. **Access the Application:**
+    - Open your browser and navigate to `http://localhost:8080` to access the frontend application.
 
 ### Testing
 - **Backend Tests:**
