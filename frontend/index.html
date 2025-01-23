@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>My Application</title>
+    <!-- Include AngularJS library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <!-- Include ngRoute module -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.js"></script>
+    <!-- Include your main app script -->
+    <script src="app.js"></script>
+    <!-- Include services and controllers -->
+    <script src="services/backendService.js"></script>
+    <script src="controllers/loginController.js"></script>
+    <script src="controllers/landingController.js"></script>
+    <script src="controllers/uploadController.js"></script>
+    <!-- Include CSS -->
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div ng-view></div>
+</body>
+</html>
