@@ -67,7 +67,7 @@ project-template/
      python -m http.server 8080
      ```
 5. **Access the Application:**
-    - Open your browser and navigate to `http://localhost:8080` to access the frontend application.
+    - Open your browser and navigate to `http://localhost:8080/#!` to access the frontend application.
 
 ### Testing
 - **Backend Tests:**
