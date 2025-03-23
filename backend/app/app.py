@@ -12,6 +12,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from pydantic import BaseModel
 import re
+import time
 
 # Load environment variables
 load_dotenv()
@@ -144,6 +145,8 @@ async def process_pdfs(
         )
     # documents = extract_pdf(pdfs)
     # qdrant_indexer = QdrantIndexer(documents)
+    start_time = time.time()
+    print("Start Time:", start_time)
     po_images = []
     drawing_images = []
     kun_quote_images = []
@@ -197,19 +200,19 @@ async def process_pdfs(
     print("Processing PDFs")
     try:
         moog_doc_response = basic_info_agent(qdrant_indexer)
-        # print("MOOG Doc Response:", moog_doc_response)
+        print("MOOG Doc Response received")
 
         basic_info = basic_info_agent_2(po_images)
-        # print("Basic Info:", basic_info)
+        print("Basic Info received:")
 
-        dates_info = all_dates_agent(po_images[0])
+        # dates_info = all_dates_agent(po_images[0])
         # print("Dates Info:", dates_info)
 
         parts_info = part_info_agent(po_images)
-        # print("Parts Info:", parts_info)
+        print("Parts Info received")
 
         drawing_info = drawing_info_agent(drawing_images)
-        # print("draw Info:", drawing_info)
+        print("draw Info received")
 
 
 
@@ -408,6 +411,10 @@ async def process_pdfs(
             "basic_info": basic_info_response,
             "check_info": check_info
         }
+
+        end_time = time.time()
+        print("End Time:", end_time)
+        print("Time taken in minutes:", (end_time - start_time) / 60)
 
 
         return final_response
