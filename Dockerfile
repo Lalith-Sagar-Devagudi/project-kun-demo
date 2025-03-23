@@ -17,7 +17,7 @@ WORKDIR /app
 # (Assuming your pyproject.toml and poetry.lock are in the backend/app folder)
 COPY backend/pyproject.toml backend/poetry.lock* ./backend/app/
 # Copy .env file /Users/lalithsagar/Desktop/MyProjects/KUN/project-kun-demo/.env
-COPY .env /app
+# COPY .env /app
 
 # Change directory to where the backend code and dependencies are defined
 WORKDIR /app/backend/app
