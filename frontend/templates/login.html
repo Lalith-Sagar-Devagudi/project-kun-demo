@@ -165,7 +165,7 @@
                 const username = $scope.username;
                 const password = $scope.password;
 
-                $http.post('http://localhost:8000/login', { username: username, password: password })
+                $http.post('/login', { username: username, password: password })
                     .then(function(response) {
                         // Handle successful login
                         // Store username and password for future requests

@@ -2,7 +2,7 @@ app.controller('LoginController', ['$scope', '$http', '$location', function($sco
     $scope.error = false;
   
     $scope.login = function() {
-      $http.post('http://localhost:8000/login', {
+      $http.post('/login', {
         username: $scope.username,
         password: $scope.password
       })

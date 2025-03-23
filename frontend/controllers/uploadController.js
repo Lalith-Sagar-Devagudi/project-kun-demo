@@ -32,7 +32,7 @@ app.controller('UploadController', ['$scope', '$http', function($scope, $http) {
       formData.append('files', $scope.pdf2);
   
       // First, upload the PDFs
-      $http.post('http://localhost:8000/upload-pdfs', formData, {
+      $http.post('/upload-pdfs', formData, {
         headers: {
           'Content-Type': undefined,
           'X-Username': username,
@@ -42,7 +42,7 @@ app.controller('UploadController', ['$scope', '$http', function($scope, $http) {
       })
       .then(function(response) {
         // Then, call /process-pdfs
-        return $http.post('http://localhost:8000/process-pdfs', {}, {
+        return $http.post('/process-pdfs', {}, {
           headers: {
             'X-Username': username,
             'X-Password': password

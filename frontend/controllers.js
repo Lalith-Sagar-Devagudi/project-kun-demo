@@ -2,7 +2,7 @@ app.controller('LoginController', ['$scope', '$http', '$location', function($sco
     $scope.error = false;
   
     $scope.login = function() {
-      $http.post('http://localhost:8000/login', {
+      $http.post('/login', {
         username: $scope.username,
         password: $scope.password
       })
@@ -61,7 +61,7 @@ app.controller('LoginController', ['$scope', '$http', '$location', function($sco
       formData.append('files', $scope.pdf2);
   
       // First, upload the PDFs
-      $http.post('http://localhost:8000/upload-pdfs', formData, {
+      $http.post('/upload-pdfs', formData, {
         headers: {
           'Content-Type': undefined,
           'X-Username': username,
@@ -71,7 +71,7 @@ app.controller('LoginController', ['$scope', '$http', '$location', function($sco
       })
       .then(function(response) {
         // Then, call /process-pdfs
-        return $http.post('http://localhost:8000/process-pdfs', {}, {
+        return $http.post('/process-pdfs', {}, {
           headers: {
             'X-Username': username,
             'X-Password': password
