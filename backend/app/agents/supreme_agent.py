@@ -62,8 +62,6 @@ def supreme_agent(agent_query: str, context: str, output_parser: PydanticOutputP
 
     result = chain.invoke({"context": context, "query": agent_query})
 
-    print(f"Result: {result}")
-
     return result.dict()
 
 def supreme_vision_agent(image_urls: List[str], system_prompt: str) -> dict:

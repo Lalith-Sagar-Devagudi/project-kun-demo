@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 from typing import List, Optional
 import sys
 import os
@@ -53,8 +55,7 @@ app.add_middleware(
 
 @app.post("/login")
 async def login(login_data: LoginRequest):
-    print(login_data)
-    print(USERNAME, PASSWORD)
+
     if login_data.username != USERNAME or login_data.password != PASSWORD:
         raise HTTPException(
             status_code=401,
@@ -81,7 +82,6 @@ async def upload_pdfs(
     moog_temp_dir = tempfile.mkdtemp()
     kun_temp_dir = tempfile.mkdtemp()
 
-    print("kun files:", kunFiles)
     
     # Initialize pdf_paths as list of lists [po_paths, drawing_paths]
     pdf_paths = [[], []]
@@ -197,19 +197,19 @@ async def process_pdfs(
     print("Processing PDFs")
     try:
         moog_doc_response = basic_info_agent(qdrant_indexer)
-        print("MOOG Doc Response:", moog_doc_response)
+        # print("MOOG Doc Response:", moog_doc_response)
 
         basic_info = basic_info_agent_2(po_images)
-        print("Basic Info:", basic_info)
+        # print("Basic Info:", basic_info)
 
         dates_info = all_dates_agent(po_images[0])
-        print("Dates Info:", dates_info)
+        # print("Dates Info:", dates_info)
 
         parts_info = part_info_agent(po_images)
-        print("Parts Info:", parts_info)
+        # print("Parts Info:", parts_info)
 
         drawing_info = drawing_info_agent(drawing_images)
-        print("draw Info:", drawing_info)
+        # print("draw Info:", drawing_info)
 
 
 
@@ -417,6 +417,14 @@ async def process_pdfs(
             status_code=500,
             detail=f"An error occurred while processing: {str(e)}"
         )
+
+# Compute the absolute path to the frontend directory
+frontend_path = Path(__file__).resolve().parent.parent.parent / "frontend"
+
+print(frontend_path)
+
+# Mount the frontend as the root (serving index.html automatically if present)
+app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="frontend")
 
 if __name__ == "__main__":
     import uvicorn

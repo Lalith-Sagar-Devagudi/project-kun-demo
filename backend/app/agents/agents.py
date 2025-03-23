@@ -18,6 +18,7 @@ def basic_info_agent(qdrant_indexer: QdrantIndexer):
     Returns:
         dict: The response from the LLM.
     """
+    print("Basic Info Agent")
     class MoogInfo(BaseModel):
         revision: str = Field(description="Revision of the document.")
         visual_inspection: str = Field(description="Visual Inspection along with point number.")

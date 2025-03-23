@@ -23,7 +23,7 @@ app.service('BackendService', function($http) {
     };
 
     this.login = function(user, pass) {
-        return $http.post('http://localhost:8000/login', {
+        return $http.post('/login', {
             username: user,
             password: pass
         });
@@ -35,14 +35,14 @@ app.service('BackendService', function($http) {
             formData.append('files', file);
         });
 
-        return $http.post('http://localhost:8000/upload-pdfs', formData, {
+        return $http.post('/upload-pdfs', formData, {
             headers: this.getHeaders(true),
             transformRequest: angular.identity
         });
     };
 
     this.processPdfs = function() {
-        return $http.post('http://localhost:8000/process-pdfs', {}, {
+        return $http.post('/process-pdfs', {}, {
             headers: this.getHeaders()
         });
     };

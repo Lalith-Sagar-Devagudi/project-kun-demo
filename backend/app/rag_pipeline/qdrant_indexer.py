@@ -127,6 +127,7 @@ class QdrantIndexer():
             list: A list of relevant documents.
         """
         vector_store = self.get_vector_store()
+        print("Vector store:", vector_store)
         # results = vector_store.max_marginal_relevance_search(
         #     query, k=n_results, fetch_k=10
         # )

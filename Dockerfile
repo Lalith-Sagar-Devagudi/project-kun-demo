@@ -1,27 +1,37 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11-slim
 
-# Set environment variables to prevent Python from writing .pyc files to disk
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Ensure Python output is sent straight to the terminal (e.g. for logging)
+ENV PYTHONUNBUFFERED=1
 
-# Install Poetry
+# Install system dependencies (e.g. gcc is often needed for compiling some packages)
+RUN apt-get update && apt-get install -y build-essential poppler-utils && rm -rf /var/lib/apt/lists/*
+
+# Install Poetry (our dependency manager)
 RUN pip install poetry
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy only the pyproject.toml and poetry.lock files to the working directory
-COPY pyproject.toml poetry.lock* /app/
+# Copy only the Poetry configuration files first to leverage Docker layer caching
+# (Assuming your pyproject.toml and poetry.lock are in the backend/app folder)
+COPY backend/pyproject.toml backend/poetry.lock* ./backend/app/
+# Copy .env file /Users/lalithsagar/Desktop/MyProjects/KUN/project-kun-demo/.env
+COPY .env /app
 
-# Install the project dependencies using Poetry
-RUN poetry install --no-root
+# Change directory to where the backend code and dependencies are defined
+WORKDIR /app/backend/app
 
-# Copy the entire frontend application into the container
+# Install dependencies and skip installing the current project package
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-root --no-interaction --no-ansi
+
+# Now copy the entire project into the container
 COPY . /app
 
-# Make port 8001 available to the world outside this container
+# Expose the port the app runs on
 EXPOSE 8000
 
-# Run the application
-CMD ["poetry", "run", "uvicorn", "frontend.app:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run the FastAPI application using Uvicorn.
+# The app mounts the frontend static files, so it will serve both backend and frontend.
+CMD ["poetry", "run", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
