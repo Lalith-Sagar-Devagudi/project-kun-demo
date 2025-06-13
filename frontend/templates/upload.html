@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>PDF Analysis</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       padding: 0;
     }
+
     body {
       display: flex;
       flex-direction: column;
@@ -29,18 +32,19 @@
     }
 
     footer {
-            width: 100%;
-            padding: 1.5rem;
-            color: white;
-            font-style: italic;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.1);
-            font-size: 1.1rem;
-            bottom: 0;
-            left: 0;
-            height: 60px; /* Fixed height */
-            box-sizing: border-box;
-        }
+      width: 100%;
+      padding: 1.5rem;
+      color: white;
+      font-style: italic;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.1);
+      font-size: 1.1rem;
+      bottom: 0;
+      left: 0;
+      height: 60px;
+      /* Fixed height */
+      box-sizing: border-box;
+    }
 
     .main-content {
       flex: 1;
@@ -65,7 +69,8 @@
     }
 
     .upload-btn {
-      position: relative; /* Add this line */
+      position: relative;
+      /* Add this line */
       border: none;
       background-color: #efe5fc;
       color: #333;
@@ -163,7 +168,8 @@
       text-align: left;
       position: relative;
       transition: all 0.3s ease;
-      display: none; /* Initially hidden */
+      display: none;
+      /* Initially hidden */
     }
 
     .results-button:hover {
@@ -235,38 +241,46 @@
     } */
 
     /* Updated Results Content Styles */
-    .results-content > p {
+    .results-content>p {
       display: flex;
       align-items: flex-start;
       margin: 0;
       font-size: 12px;
-      border-bottom: 1px solid #ccc; /* Horizontal border between rows */
+      border-bottom: 1px solid #ccc;
+      /* Horizontal border between rows */
       padding: 10px 0;
     }
 
-    .results-content > p:last-child {
-      border-bottom: none; /* Remove bottom border from the last row */
+    .results-content>p:last-child {
+      border-bottom: none;
+      /* Remove bottom border from the last row */
     }
 
-    .results-content > p strong {
+    .results-content>p strong {
       width: 250px;
       min-width: 250px;
-      margin-right: 0; /* Remove right margin to align borders */
+      margin-right: 0;
+      /* Remove right margin to align borders */
       font-size: 12px;
       line-height: 1;
-      border-right: 1px solid #ccc; /* Add vertical border on the right */
-      padding-right: 10px; /* Space between text and border */
+      border-right: 1px solid #ccc;
+      /* Add vertical border on the right */
+      padding-right: 10px;
+      /* Space between text and border */
     }
 
-    .results-content > p input[type="text"],
-    .results-content > p textarea {
+    .results-content>p input[type="text"],
+    .results-content>p textarea {
       flex-grow: 1;
       width: auto;
       font-size: 12px;
       line-height: 1;
-      margin-left: 0; /* Remove left margin to align borders */
-      padding-left: 10px; /* Space between border and text */
-      border-left: 1px solid #ccc; /* Add vertical border on the left */
+      margin-left: 0;
+      /* Remove left margin to align borders */
+      padding-left: 10px;
+      /* Space between border and text */
+      border-left: 1px solid #ccc;
+      /* Add vertical border on the left */
     }
 
     .loading-overlay {
@@ -298,7 +312,7 @@
       height: 3rem;
       color: #282B56;
     }
-    
+
     .basic-info-frame {
       border: 1px solid #ccc;
       padding: 8px;
@@ -332,7 +346,8 @@
     textarea {
       border: none;
       background-color: transparent;
-      border-bottom: 1px solid transparent; /* Ensures no extra borders */
+      border-bottom: 1px solid transparent;
+      /* Ensures no extra borders */
       padding: 0;
       flex-grow: 1;
       width: 100%;
@@ -363,10 +378,9 @@
       opacity: 0.5;
       transition: opacity 0.5s ease;
     }
-
-
   </style>
 </head>
+
 <body>
   <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-content">
@@ -386,7 +400,9 @@
             <div class="upload-btn">
               <i class="fas fa-file-upload upload-icon"></i>
               <div>Upload MOOG Documents</div>
-              <input type="file" id="pdf1" name="moogFiles" accept="application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" multiple />
+              <input type="file" id="pdf1" name="moogFiles"
+                accept="application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                multiple />
             </div>
             <div id="moogFileList" class="file-list"></div>
           </div>
@@ -395,7 +411,9 @@
             <div class="upload-btn">
               <i class="fas fa-file-upload upload-icon"></i>
               <div>Upload KUN Documents</div>
-              <input type="file" id="pdf2" name="kunFiles" accept="application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" multiple />
+              <input type="file" id="pdf2" name="kunFiles"
+                accept="application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                multiple />
             </div>
             <div id="kunFileList" class="file-list"></div>
           </div>
@@ -462,238 +480,244 @@
             <input type="text" id="basic-date-required" readonly>
           </p>
         </div>
-        </div>
-    
+      </div>
+
       <!-- Checklist button and content initially hidden -->
-      <button class="results-button" onclick="toggleResults('checklist')" id="checklist-button" >
-          Checklist
-          <i class="fas fa-chevron-down icon"></i>
-        </button>
-        <div class="results-content" id="checklist-content">
-          <p>
-            <strong>Drawing revision match with PO</strong>
-            <input type="text" id="quality-draw-po-rev" readonly>
-          </p>
-          <p>
-            <strong>Special Quality Requirements:</strong>
-            <input type="text" id="quality-special-quality-requirements" readonly>
-          </p>
-          <p>
-            <strong>Raw Material Standards</strong>
-            <input type="text" id="quality-raw-material-standard" readonly>
-          </p>
+      <button class="results-button" onclick="toggleResults('checklist')" id="checklist-button">
+        Checklist
+        <i class="fas fa-chevron-down icon"></i>
+      </button>
+      <div class="results-content" id="checklist-content">
+        <p>
+          <strong>Drawing revision match with PO</strong>
+          <input type="text" id="quality-draw-po-rev" readonly>
+        </p>
+        <p>
+          <strong>Special Quality Requirements:</strong>
+          <input type="text" id="quality-special-quality-requirements" readonly>
+        </p>
+        <p>
+          <strong>Raw Material Standards</strong>
+          <input type="text" id="quality-raw-material-standard" readonly>
+        </p>
 
-          <p>
-            <strong>RTS Number</strong>
-            <input type="text" id="rts-rts-num" readonly>
-          </p>
-          <p>
-            <strong>RFQ Number</strong>
-            <input type="text" id="rts-rfq-num" readonly>
-          </p>
-          <p>
-            <strong>Is the PO price match with Quoted Price?</strong>
-            <input type="text" id="qex-price-match" readonly>
-          </p>
-          <p>
-            <strong>Is the NRE cost match with Quoted NRE Cost?</strong>
-            <input type="text" id="qex-nre-match" readonly>
-          </p>
-          <p>
-            <strong>Is the PO MOQ matched and verified with the Quoted MOQ?</strong>
-            <input type="text" id="moq-match" readonly>
-          </p>
-          
-
-          <p>
-            <strong>Ex-works in PO and KUN Quote pdf</strong>
-            <textarea id="exw-price-match" readonly rows="2"></textarea>
-          </p>
-
-          <p>
-            <strong>Is the PO lead time is with in the Quoted lead time?</strong>
-            <textarea id="quo-lead-time-match" readonly rows="2"></textarea>
-          </p>     
-
-          <p>
-            <strong>Special Quality Requirements Clauses </strong>
-            <input type="text" id="quality-clauses" readonly>
-          </p>
-          <p>
-            <strong>Special Raw Material Requirements from customer in PO</strong>
-            <textarea id="special-rm-customer" readonly rows="2"></textarea>
-          </p>
-
-          <p>
-            <strong>Critical characteristics </strong>
-            <textarea id="critical-notes" readonly rows="2"></textarea>
-          </p>
-
-          <p>
-            <strong>Special process</strong>
-            <textarea id="special-process" readonly rows="2"></textarea>
-          </p>
-
-          <p>
-            <strong>KUN Quotation Date </strong>
-            <input type="text" id="kun-quote-date" readonly>
-          </p>
-          <p>
-            <strong>PO Terms & Conditions Reviewed </strong>
-            <input type="text" id="po-terms-conditions" readonly>
-          </p>
-          <p>
-            <strong>PO received within the quotation validity?</strong>
-            <input type="text" id="po-date-in-quote-date" readonly>
-          </p>
-          <p>
-            <strong>Moog Supplier Quality Requirements</strong>
-            <input type="text" id="moog-supplier-quality-requirements" readonly>
-          </p>
-          <p>
-            <strong>Raw Materials suppliers in ASL</strong>
-            <textarea id="asl-raw-materials" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Drawing Notes</strong>
-            <textarea id="drawing-notes" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Material Supplier mentioned in Drawing</strong>
-            <input type="text" id="material-supplier" readonly>
-          </p>
-          <p>
-            <strong>Moog Documnet Revision</strong>
-            <input type="text" id="moog-doc-rev" readonly>
-          </p>
-          <p>
-            <strong>Visual inspection mentioned in Moog Document</strong>
-            <textarea id="visual-inspection" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Production Part Approval Process mentioned in Moog Document</strong>
-            <textarea id="ppap" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Flow Down Requirements mentioned in Moog Document</strong>
-            <textarea id="flow-down" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Prohibited substances mentioned in Moog Document</strong>
-            <input type="text" id="prohibited-substances" readonly>
-          </p>
-          <p>
-            <strong>Statutory and Regulatory Requirements mentioned in Moog Document</strong>
-            <textarea id="satutory-requirements" readonly rows="2"></textarea>
-          </p>
-
-          <p>
-            <strong>Raw material requirements in Drawing notes.</strong>
-            <textarea id="drawing-raw-materials" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Special process requirements in Drawing notes.</strong>
-            <textarea id="drawing-special-process" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Child parts requirements in Drawing notes.</strong>
-            <textarea id="drawing-child-parts" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Marking requirements in Drawing notes.</strong>
-            <textarea id="drawing-markings" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Specialized packaging requirements applicable</strong>
-            <textarea id="special-package" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Proprietary info mentioned in Drawing</strong>
-            <input type="text" id="proprietary-info" readonly>
-          </p>
-          <p>
-            <strong>Red lined notes in Drawing</strong>
-            <textarea id="redline" readonly rows="2"></textarea>
-          </p>
+        <p>
+          <strong>RTS Number</strong>
+          <input type="text" id="rts-rts-num" readonly>
+        </p>
+        <p>
+          <strong>RFQ Number</strong>
+          <input type="text" id="rts-rfq-num" readonly>
+        </p>
+        <p>
+          <strong>Is the PO price match with Quoted Price?</strong>
+          <input type="text" id="qex-price-match" readonly>
+        </p>
+        <p>
+          <strong>Is the NRE cost match with Quoted NRE Cost?</strong>
+          <input type="text" id="qex-nre-match" readonly>
+        </p>
+        <p>
+          <strong>Is the PO MOQ matched and verified with the Quoted MOQ?</strong>
+          <input type="text" id="moq-match" readonly>
+        </p>
 
 
-          
-          <p>
-            <strong>Is there any risk been identified for this part?  </strong>
-            <textarea id="part-risk" readonly rows="2"></textarea>
-          </p> 
-          <p>
-            <strong>Do all necessary documents (Customer Drawing, Model, Specifications, etc.) are available to latest revision as per PO & Drawing? </strong>
-            <textarea id="necessary-documents" readonly rows="2"></textarea>
-          </p> 
-          <p>
-            <strong>Are Capacity Planning and Analysis performed?</strong>
-            <textarea id="capacity-planning" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Is there any Customer provided material/casting/forgings are available?</strong>
-            <textarea id="customer-material" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Any operations that requires outside sources?</strong>
-            <textarea id="outside-sources" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Are Detailed finished parts/ Bought out parts/ Assembly parts (i.e. metals, electronics, and/or hardware) suppliers are been identified and selected?</strong>
-            <textarea id="finished-parts" readonly rows="2"></textarea>
-          </p>
-          <p>
-            <strong>Any Critical Consumables suppliers?</strong>
-            <textarea id="critical-consumables" readonly rows="2"></textarea>
-          </p>
+        <p>
+          <strong>Ex-works in PO and KUN Quote pdf</strong>
+          <textarea id="exw-price-match" readonly rows="2"></textarea>
+        </p>
 
-          <p>
-            <strong>Are there any risks associated with sub-tiers that are mitigated for potential impacts?</strong>
-            <textarea id="risks" readonly rows="2"></textarea>
-          </p>
+        <p>
+          <strong>Is the PO lead time is with in the Quoted lead time?</strong>
+          <textarea id="quo-lead-time-match" readonly rows="2"></textarea>
+        </p>
 
-          <p>
-            <strong>Are required gauges and equipments available?</strong>
-            <textarea id="gauges" readonly rows="2"></textarea>
-          </p>
+        <p>
+          <strong>Special Quality Requirements Clauses </strong>
+          <input type="text" id="quality-clauses" readonly>
+        </p>
+        <p>
+          <strong>Special Raw Material Requirements from customer in PO</strong>
+          <textarea id="special-rm-customer" readonly rows="2"></textarea>
+        </p>
 
-          <p>
-            <strong>Are customer provided gauges or equipments available?</strong>
-            <textarea id="customer-gauges" readonly rows="2"></textarea>
-          </p>
+        <p>
+          <strong>Critical characteristics </strong>
+          <textarea id="critical-notes" readonly rows="2"></textarea>
+        </p>
 
-          <p>
-            <strong>Customer/End Customer approved suppliers used for Special Process</strong>
-            <textarea id="customer-supplier" readonly rows="2"></textarea>
-          </p>
+        <p>
+          <strong>Special process</strong>
+          <textarea id="special-process" readonly rows="2"></textarea>
+        </p>
 
-          <div class="section-buttons">
-            <button type="button" class="btn btn-sm btn-secondary section-edit-btn" onclick="editSection('marketing-content')">Edit</button>
-            <button type="button" class="btn btn-sm btn-success section-save-btn" onclick="saveSection('marketing-content')" disabled>Save</button>
-            <button type="button" class="btn btn-sm btn-primary section-download-btn" onclick="downloadSection('marketing')">Download</button>
-          </div>
+        <p>
+          <strong>KUN Quotation Date </strong>
+          <input type="text" id="kun-quote-date" readonly>
+        </p>
+        <p>
+          <strong>PO Terms & Conditions Reviewed </strong>
+          <input type="text" id="po-terms-conditions" readonly>
+        </p>
+        <p>
+          <strong>PO received within the quotation validity?</strong>
+          <input type="text" id="po-date-in-quote-date" readonly>
+        </p>
+        <p>
+          <strong>Moog Supplier Quality Requirements</strong>
+          <input type="text" id="moog-supplier-quality-requirements" readonly>
+        </p>
+        <p>
+          <strong>Raw Materials suppliers in ASL</strong>
+          <textarea id="asl-raw-materials" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Drawing Notes</strong>
+          <textarea id="drawing-notes" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Material Supplier mentioned in Drawing</strong>
+          <input type="text" id="material-supplier" readonly>
+        </p>
+        <p>
+          <strong>Moog Documnet Revision</strong>
+          <input type="text" id="moog-doc-rev" readonly>
+        </p>
+        <p>
+          <strong>Visual inspection mentioned in Moog Document</strong>
+          <textarea id="visual-inspection" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Production Part Approval Process mentioned in Moog Document</strong>
+          <textarea id="ppap" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Flow Down Requirements mentioned in Moog Document</strong>
+          <textarea id="flow-down" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Prohibited substances mentioned in Moog Document</strong>
+          <input type="text" id="prohibited-substances" readonly>
+        </p>
+        <p>
+          <strong>Statutory and Regulatory Requirements mentioned in Moog Document</strong>
+          <textarea id="satutory-requirements" readonly rows="2"></textarea>
+        </p>
+
+        <p>
+          <strong>Raw material requirements in Drawing notes.</strong>
+          <textarea id="drawing-raw-materials" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Special process requirements in Drawing notes.</strong>
+          <textarea id="drawing-special-process" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Child parts requirements in Drawing notes.</strong>
+          <textarea id="drawing-child-parts" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Marking requirements in Drawing notes.</strong>
+          <textarea id="drawing-markings" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Specialized packaging requirements applicable</strong>
+          <textarea id="special-package" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Proprietary info mentioned in Drawing</strong>
+          <input type="text" id="proprietary-info" readonly>
+        </p>
+        <p>
+          <strong>Red lined notes in Drawing</strong>
+          <textarea id="redline" readonly rows="2"></textarea>
+        </p>
+
+
+
+        <p>
+          <strong>Is there any risk been identified for this part? </strong>
+          <textarea id="part-risk" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Do all necessary documents (Customer Drawing, Model, Specifications, etc.) are available to latest
+            revision as per PO & Drawing? </strong>
+          <textarea id="necessary-documents" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Are Capacity Planning and Analysis performed?</strong>
+          <textarea id="capacity-planning" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Is there any Customer provided material/casting/forgings are available?</strong>
+          <textarea id="customer-material" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Any operations that requires outside sources?</strong>
+          <textarea id="outside-sources" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Are Detailed finished parts/ Bought out parts/ Assembly parts (i.e. metals, electronics, and/or
+            hardware) suppliers are been identified and selected?</strong>
+          <textarea id="finished-parts" readonly rows="2"></textarea>
+        </p>
+        <p>
+          <strong>Any Critical Consumables suppliers?</strong>
+          <textarea id="critical-consumables" readonly rows="2"></textarea>
+        </p>
+
+        <p>
+          <strong>Are there any risks associated with sub-tiers that are mitigated for potential impacts?</strong>
+          <textarea id="risks" readonly rows="2"></textarea>
+        </p>
+
+        <p>
+          <strong>Are required gauges and equipments available?</strong>
+          <textarea id="gauges" readonly rows="2"></textarea>
+        </p>
+
+        <p>
+          <strong>Are customer provided gauges or equipments available?</strong>
+          <textarea id="customer-gauges" readonly rows="2"></textarea>
+        </p>
+
+        <p>
+          <strong>Customer/End Customer approved suppliers used for Special Process</strong>
+          <textarea id="customer-supplier" readonly rows="2"></textarea>
+        </p>
+
+        <div class="section-buttons">
+          <button type="button" class="btn btn-sm btn-secondary section-edit-btn"
+            onclick="editSection('marketing-content')">Edit</button>
+          <button type="button" class="btn btn-sm btn-success section-save-btn"
+            onclick="saveSection('marketing-content')" disabled>Save</button>
+          <button type="button" class="btn btn-sm btn-primary section-download-btn"
+            onclick="downloadSection('marketing')">Download</button>
         </div>
+      </div>
 
-      <button type="button" class="btn btn-primary download-btn" onclick="downloadResults()" id="downloadResultsBtn" style="display:none;">Download Results</button>
+      <button type="button" class="btn btn-primary download-btn" onclick="downloadResults()" id="downloadResultsBtn"
+        style="display:none;">Download Results</button>
     </div>
   </div>
   <footer>Powered by NeuGenAI</footer>
 
   <script>
 
-    document.getElementById('pdf1').addEventListener('change', function(e) {
+    document.getElementById('pdf1').addEventListener('change', function (e) {
       const fileList = document.getElementById('moogFileList');
       fileList.innerHTML = ''; // Clear previous files
-      
+
       for (let file of this.files) {
         const fileNameElement = document.createElement('div');
         const fileName = document.createElement('span');
         fileName.textContent = file.name;
-        
+
         const removeButton = document.createElement('span');
         removeButton.textContent = ' x';
         removeButton.className = 'remove-file';
-        removeButton.onclick = function(e) {
+        removeButton.onclick = function (e) {
           e.stopPropagation();
           fileNameElement.remove();
           // Create a new FileList without the removed file
@@ -707,26 +731,26 @@
           }
           input.files = dt.files;
         };
-        
+
         fileNameElement.appendChild(fileName);
         fileNameElement.appendChild(removeButton);
         fileList.appendChild(fileNameElement);
       }
     });
 
-    document.getElementById('pdf2').addEventListener('change', function(e) {
+    document.getElementById('pdf2').addEventListener('change', function (e) {
       const fileList = document.getElementById('kunFileList');
       fileList.innerHTML = ''; // Clear previous files
-      
+
       for (let file of this.files) {
         const fileNameElement = document.createElement('div');
         const fileName = document.createElement('span');
         fileName.textContent = file.name;
-        
+
         const removeButton = document.createElement('span');
         removeButton.textContent = ' x';
         removeButton.className = 'remove-file';
-        removeButton.onclick = function(e) {
+        removeButton.onclick = function (e) {
           e.stopPropagation();
           e.preventDefault();
           fileNameElement.remove();
@@ -741,7 +765,7 @@
           }
           input.files = dt.files;
         };
-        
+
         fileNameElement.appendChild(fileName);
         fileNameElement.appendChild(removeButton);
         fileList.appendChild(fileNameElement);
@@ -781,7 +805,7 @@
       saveButton.disabled = true;
     }
 
-    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    document.getElementById('uploadForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
       const moogFiles = document.getElementById('pdf1').files;
@@ -817,7 +841,7 @@
         return;
       }
 
-      fetch('/upload-pdfs', {
+      fetch('http://localhost:8000/upload-pdfs', {
         method: 'POST',
         headers: {
           'X-Username': username,
@@ -825,173 +849,173 @@
         },
         body: formData
       })
-      .then(response => {
-        if (response.ok) {
-          return fetch('/process-pdfs', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Username': username,
-              'X-Password': password
-            }
-          });
-        } else {
-          throw new Error('Failed to upload PDFs');
-        }
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to process PDFs');
-        }
-        return response.json();
-      })
-      .then(data => {
-        const basicInfo = data.basic_info;
-        // Update basic info
-        document.getElementById('basic-project').value = basicInfo.project || 'N/A';
-        document.getElementById('basic-po-number').value = basicInfo.po_number || 'N/A';
-        document.getElementById('basic-po-date').value = basicInfo.po_date || 'N/A';
-        document.getElementById('basic-vendor-number').value = basicInfo.vendor_number || 'N/A';
-        document.getElementById('basic-vendor-terms').value = basicInfo.vendor_terms || 'N/A';
-        document.getElementById('basic-contract-review-raise-date').value = basicInfo.contract_review_raise_date || 'N/A';
-        document.getElementById('basic-part-number').value = basicInfo.part_number || 'N/A';
-        document.getElementById('basic-part-name').value = basicInfo.part_name || 'N/A';
-        document.getElementById('basic-part-unit-price').value = basicInfo.part_unit_price || 'N/A';
-        document.getElementById('basic-part-quantity').value = basicInfo.part_quantity || 'N/A';
-        document.getElementById('basic-part-revision-status').value = basicInfo.part_revision_status || 'N/A';
-        document.getElementById('basic-po-type').value = basicInfo.part_po_type || 'N/A';
-        document.getElementById('basic-date-required').value = basicInfo.date_required || 'N/A';
+        .then(response => {
+          if (response.ok) {
+            return fetch('http://localhost:8000/process-pdfs', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Username': username,
+                'X-Password': password
+              }
+            });
+          } else {
+            throw new Error('Failed to upload PDFs');
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to process PDFs');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const basicInfo = data.basic_info;
+          // Update basic info
+          document.getElementById('basic-project').value = basicInfo.project || 'N/A';
+          document.getElementById('basic-po-number').value = 'CONFIDENTIAL';
+          document.getElementById('basic-po-date').value = basicInfo.po_date || 'N/A';
+          document.getElementById('basic-vendor-number').value = 'CONFIDENTIAL';
+          document.getElementById('basic-vendor-terms').value = basicInfo.vendor_terms || 'N/A';
+          document.getElementById('basic-contract-review-raise-date').value = basicInfo.contract_review_raise_date || 'N/A';
+          document.getElementById('basic-part-number').value = 'CONFIDENTIAL';
+          document.getElementById('basic-part-name').value = 'CONFIDENTIAL';
+          document.getElementById('basic-part-unit-price').value = 'CONFIDENTIAL';
+          document.getElementById('basic-part-quantity').value = basicInfo.part_quantity || 'N/A';
+          document.getElementById('basic-part-revision-status').value = basicInfo.part_revision_status || 'N/A';
+          document.getElementById('basic-po-type').value = basicInfo.part_po_type || 'N/A';
+          document.getElementById('basic-date-required').value = basicInfo.date_required || 'N/A';
 
-        // Quality Section
-        document.getElementById('quality-draw-po-rev').value = data.check_info.po_draw_rev_match || 'N/A';
-        document.getElementById('quality-special-quality-requirements').value = data.check_info.special_quality_requirements || 'N/A';
-        document.getElementById('quality-raw-material-standard').value = data.check_info.available_rm_standards || 'N/A';
+          // Quality Section
+          document.getElementById('quality-draw-po-rev').value = data.check_info.po_draw_rev_match || 'N/A';
+          document.getElementById('quality-special-quality-requirements').value = data.check_info.special_quality_requirements || 'N/A';
+          document.getElementById('quality-raw-material-standard').value = data.check_info.available_rm_standards || 'N/A';
 
-        // RTS Section
-        document.getElementById('rts-rts-num').value = data.check_info.rts_no || 'N/A';
-        document.getElementById('rts-rfq-num').value = data.check_info.rfq_no || 'N/A';
+          // RTS Section
+          document.getElementById('rts-rts-num').value = data.check_info.rts_no || 'N/A';
+          document.getElementById('rts-rfq-num').value = data.check_info.rfq_no || 'N/A';
 
-        // QEX Section
-        document.getElementById('qex-price-match').value = data.check_info.unit_price_match || 'N/A';
-        document.getElementById('qex-nre-match').value = data.check_info.nre_cost_match || 'N/A';
+          // QEX Section
+          document.getElementById('qex-price-match').value = 'CONFIDENTIAL';
+          document.getElementById('qex-nre-match').value = data.check_info.nre_cost_match || 'N/A';
 
-        // Ex-works Section
-        document.getElementById('exw-price-match').value = data.check_info.ex_works || 'N/A';
+          // Ex-works Section
+          document.getElementById('exw-price-match').value = 'CONFIDENTIAL';
 
-        document.getElementById('quo-lead-time-match').value = data.check_info.qex_lead_time_match || 'N/A';
+          document.getElementById('quo-lead-time-match').value = data.check_info.qex_lead_time_match || 'N/A';
 
-        document.getElementById('quality-clauses').value = data.check_info.quality_clauses || 'N/A';
+          document.getElementById('quality-clauses').value = data.check_info.quality_clauses || 'N/A';
 
-        document.getElementById('critical-notes').value = data.check_info.critical_characteristics || 'N/A';
+          document.getElementById('critical-notes').value = data.check_info.critical_characteristics || 'N/A';
 
-        document.getElementById('special-process').value = data.check_info.special_process || 'N/A';
+          document.getElementById('special-process').value = data.check_info.special_process || 'N/A';
 
-        document.getElementById('kun-quote-date').value = data.check_info.kun_quotation_date || 'N/A';
+          document.getElementById('kun-quote-date').value = data.check_info.kun_quotation_date || 'N/A';
 
-        document.getElementById('po-date-in-quote-date').value = data.check_info.po_date_in_quote || 'N/A';
+          document.getElementById('po-date-in-quote-date').value = data.check_info.po_date_in_quote || 'N/A';
 
-        document.getElementById('moog-supplier-quality-requirements').value = data.basic_info.moog_supplier_quality_requirements || 'N/A';
+          document.getElementById('moog-supplier-quality-requirements').value = data.basic_info.moog_supplier_quality_requirements || 'N/A';
 
-        document.getElementById('asl-raw-materials').value = data.check_info.asl_raw_materials || 'N/A';
+          document.getElementById('asl-raw-materials').value = 'CONFIDENTIAL';
 
-        document.getElementById('necessary-documents').value = "Please Enter the details here...";
+          document.getElementById('necessary-documents').value = "Please Enter the details here...";
 
-        document.getElementById('capacity-planning').value = "Please Enter the details here...";
+          document.getElementById('capacity-planning').value = "Please Enter the details here...";
 
-        document.getElementById('customer-material').value = "Please Enter the details here...";
+          document.getElementById('customer-material').value = "Please Enter the details here...";
 
-        document.getElementById('outside-sources').value = "Please Enter the details here...";
+          document.getElementById('outside-sources').value = "Please Enter the details here...";
 
-        document.getElementById('finished-parts').value = "Please Enter the details here...";
+          document.getElementById('finished-parts').value = "Please Enter the details here...";
 
-        document.getElementById('critical-consumables').value = "Please Enter the details here...";
+          document.getElementById('critical-consumables').value = "Please Enter the details here...";
 
-        document.getElementById('risks').value = "Please Enter the details here...";
+          document.getElementById('risks').value = "Please Enter the details here...";
 
-        document.getElementById('gauges').value = "Please Enter the details here...";
+          document.getElementById('gauges').value = "Please Enter the details here...";
 
-        document.getElementById('customer-gauges').value = "Please Enter the details here...";
+          document.getElementById('customer-gauges').value = "Please Enter the details here...";
 
-        document.getElementById('drawing-notes').value = data.check_info.drawing_notes || 'N/A';
+          document.getElementById('drawing-notes').value = 'CONFIDENTIAL';
 
-        document.getElementById('material-supplier').value = data.check_info.material_supplier || 'N/A';
+          document.getElementById('material-supplier').value = data.check_info.material_supplier || 'N/A';
 
-        document.getElementById('moog-doc-rev').value = data.check_info.moog_doc_revision || 'N/A';
+          document.getElementById('moog-doc-rev').value = data.check_info.moog_doc_revision || 'N/A';
 
-        document.getElementById('visual-inspection').value = data.check_info.moog_visual_inspection || 'N/A';
+          document.getElementById('visual-inspection').value = data.check_info.moog_visual_inspection || 'N/A';
 
-        document.getElementById('ppap').value = data.check_info.ppap || 'N/A';
+          document.getElementById('ppap').value = data.check_info.ppap || 'N/A';
 
-        document.getElementById('flow-down').value = data.check_info.moog_flow_down_requirements || 'N/A';
+          document.getElementById('flow-down').value = data.check_info.moog_flow_down_requirements || 'N/A';
 
-        document.getElementById('prohibited-substances').value = data.check_info.prohibited_substances || 'N/A';
+          document.getElementById('prohibited-substances').value = data.check_info.prohibited_substances || 'N/A';
 
-        document.getElementById('moq-match').value = data.check_info.moq_check || 'N/A';
+          document.getElementById('moq-match').value = data.check_info.moq_check || 'N/A';
 
-        document.getElementById('po-terms-conditions').value = data.check_info.po_terms_conditions || 'N/A';
+          document.getElementById('po-terms-conditions').value = data.check_info.po_terms_conditions || 'N/A';
 
-        document.getElementById('drawing-raw-materials').value = data.check_info.drawing_raw_materials || 'N/A';
+          document.getElementById('drawing-raw-materials').value = 'CONFIDENTIAL';
 
-        document.getElementById('drawing-special-process').value = data.check_info.drawing_special_process || 'N/A';
+          document.getElementById('drawing-special-process').value = 'CONFIDENTIAL';
 
-        document.getElementById('drawing-child-parts').value = data.check_info.drawing_child_part || 'N/A';
+          document.getElementById('drawing-child-parts').value = 'CONFIDENTIAL';
 
-        document.getElementById('drawing-markings').value = data.check_info.drawing_marking || 'N/A';
+          document.getElementById('drawing-markings').value = data.check_info.drawing_marking || 'N/A';
 
-        document.getElementById('part-risk').value = "Please Enter the details here...";
+          document.getElementById('part-risk').value = "Please Enter the details here...";
 
-        document.getElementById('special-package').value = "Use part separation dividers or unitized packing to prevent part-to-part contact or packaging damage.";
-        
-        document.getElementById('satutory-requirements').value = data.check_info.statutory_regulatory_requirements || 'N/A';
+          document.getElementById('special-package').value = "Use part separation dividers or unitized packing to prevent part-to-part contact or packaging damage.";
 
-        document.getElementById('special-rm-customer').value = data.check_info.customer_special_rm_requirements || 'N/A';
+          document.getElementById('satutory-requirements').value = data.check_info.statutory_regulatory_requirements || 'N/A';
 
-        document.getElementById('proprietary-info').value = data.check_info.proprietary_info || 'N/A';
+          document.getElementById('special-rm-customer').value = data.check_info.customer_special_rm_requirements || 'N/A';
 
-        document.getElementById('redline').value = data.check_info.red_line_notes || 'N/A';
+          document.getElementById('proprietary-info').value = data.check_info.proprietary_info || 'N/A';
 
-        document.getElementById('customer-supplier').value = "Please Enter the details here...";
+          document.getElementById('redline').value = data.check_info.red_line_notes || 'N/A';
+
+          document.getElementById('customer-supplier').value = "Please Enter the details here...";
 
 
-        
 
-        // Show the results section
-        document.getElementById('results').style.display = 'block';
-        var logoContainer = document.getElementById('logoContainer');
-        if (logoContainer) {
-          logoContainer.style.display = 'none';
-        }        
 
-        // Show the checklist button and download button after results are available
-        document.getElementById('checklist-button').style.display = 'block';
-        document.getElementById('downloadResultsBtn').style.display = 'block';
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred: ' + error.message);
-      })
-      .finally(() => {
-        // Hide loading overlay
-        document.getElementById('loadingOverlay').style.display = 'none';
-        // Enable Analyse button
-        document.getElementById('analyseButton').disabled = false;
-      });
+          // Show the results section
+          document.getElementById('results').style.display = 'block';
+          var logoContainer = document.getElementById('logoContainer');
+          if (logoContainer) {
+            logoContainer.style.display = 'none';
+          }
+
+          // Show the checklist button and download button after results are available
+          document.getElementById('checklist-button').style.display = 'block';
+          document.getElementById('downloadResultsBtn').style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred: ' + error.message);
+        })
+        .finally(() => {
+          // Hide loading overlay
+          document.getElementById('loadingOverlay').style.display = 'none';
+          // Enable Analyse button
+          document.getElementById('analyseButton').disabled = false;
+        });
     });
-    
+
 
     function downloadAllDetails() {
       let content = 'Additional Details:\n\n';
 
       const fields = [
-        {id: 'purchase-special-rm-requirements', label: 'Special Raw Material Requirements'},
-        {id: 'marketing-payment-terms', label: 'Payment Terms'},
-        {id: 'marketing-po-unit-price-match', label: 'PO Unit Price Match'},
-        {id: 'marketing-reason-unit-price-match', label: 'Reason for Unit Price Mismatch'},
-        {id: 'marketing-lead-time-match', label: 'Lead Time Match'},
-        {id: 'marketing-reason-lead-time-match', label: 'Reason for Lead Time Mismatch'},
-        {id: 'quality-draw-po-rev', label: 'Drawing Revision Match with PO'},
-        {id: 'quality-special-quality-requirements', label: 'Special Quality Requirements'},
-        {id: 'quality-raw-material-standard', label: 'Raw Material Standards'}
+        { id: 'purchase-special-rm-requirements', label: 'Special Raw Material Requirements' },
+        { id: 'marketing-payment-terms', label: 'Payment Terms' },
+        { id: 'marketing-po-unit-price-match', label: 'PO Unit Price Match' },
+        { id: 'marketing-reason-unit-price-match', label: 'Reason for Unit Price Mismatch' },
+        { id: 'marketing-lead-time-match', label: 'Lead Time Match' },
+        { id: 'marketing-reason-lead-time-match', label: 'Reason for Lead Time Mismatch' },
+        { id: 'quality-draw-po-rev', label: 'Drawing Revision Match with PO' },
+        { id: 'quality-special-quality-requirements', label: 'Special Quality Requirements' },
+        { id: 'quality-raw-material-standard', label: 'Raw Material Standards' }
       ];
 
       fields.forEach(field => {
@@ -1010,12 +1034,12 @@
       document.body.removeChild(link);
     }
 
-  function downloadResults() {
-    // Create workbook and worksheet
-    const wb = XLSX.utils.book_new();
-    
-    // Basic Info Data
-    const basicFields = [
+    function downloadResults() {
+      // Create workbook and worksheet
+      const wb = XLSX.utils.book_new();
+
+      // Basic Info Data
+      const basicFields = [
         ['Basic Information'],
         ['Field', 'Value'],
         ['Project', document.getElementById('basic-project').value],
@@ -1031,10 +1055,10 @@
         ['Part Revision Status', document.getElementById('basic-part-revision-status').value],
         ['PO Type', document.getElementById('basic-po-type').value],
         ['Date Required', document.getElementById('basic-date-required').value]
-    ];
+      ];
 
-    // Checklist Data
-    const checklistFields = [
+      // Checklist Data
+      const checklistFields = [
         ['Checklist Information'],
         ['Field', 'Value'],
         ['Drawing revision match with PO', document.getElementById('quality-draw-po-rev').value],
@@ -1081,44 +1105,44 @@
         ['Proprietary Information', document.getElementById('proprietary-info').value],
         ['Redline Notes', document.getElementById('redline').value],
         ['Customer Approved Suppliers', document.getElementById('customer-supplier').value]
-    ];
+      ];
 
-    // Create worksheets
-    const wsBasic = XLSX.utils.aoa_to_sheet(basicFields);
-    const wsChecklist = XLSX.utils.aoa_to_sheet(checklistFields);
+      // Create worksheets
+      const wsBasic = XLSX.utils.aoa_to_sheet(basicFields);
+      const wsChecklist = XLSX.utils.aoa_to_sheet(checklistFields);
 
-    // Set column widths
-    wsBasic['!cols'] = [{ wch: 30 }, { wch: 50 }];
-    wsChecklist['!cols'] = [{ wch: 30 }, { wch: 50 }];
+      // Set column widths
+      wsBasic['!cols'] = [{ wch: 30 }, { wch: 50 }];
+      wsChecklist['!cols'] = [{ wch: 30 }, { wch: 50 }];
 
-    // Add worksheets to workbook
-    XLSX.utils.book_append_sheet(wb, wsBasic, "Basic Information");
-    XLSX.utils.book_append_sheet(wb, wsChecklist, "Checklist");
+      // Add worksheets to workbook
+      XLSX.utils.book_append_sheet(wb, wsBasic, "Basic Information");
+      XLSX.utils.book_append_sheet(wb, wsChecklist, "Checklist");
 
-    // Generate Excel file
-    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+      // Generate Excel file
+      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
 
-    // Convert to blob and download
-    function s2ab(s) {
+      // Convert to blob and download
+      function s2ab(s) {
         const buf = new ArrayBuffer(s.length);
         const view = new Uint8Array(buf);
         for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
         return buf;
-    }
+      }
 
-    const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'contract_review_checklist.xlsx';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
+      const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'contract_review_checklist.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
-    }, 0);
-}
+      }, 0);
+    }
   </script>
 </body>
-</html>
 
+</html>
