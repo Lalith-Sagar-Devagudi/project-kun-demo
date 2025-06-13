@@ -841,7 +841,7 @@
         return;
       }
 
-      fetch('http://localhost:8000/upload-pdfs', {
+      fetch('/upload-pdfs', {
         method: 'POST',
         headers: {
           'X-Username': username,
@@ -851,7 +851,7 @@
       })
         .then(response => {
           if (response.ok) {
-            return fetch('http://localhost:8000/process-pdfs', {
+            return fetch('/process-pdfs', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
